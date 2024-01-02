@@ -143,7 +143,6 @@ def checkChemicalWord(charArr):
     except:
         try:
             el = periodicTable[charArr[i]] + " "
-            
             charArr.pop(i)
 
             check, chemicalWord = checkChemicalWord(charArr)
@@ -162,6 +161,7 @@ words = json.load(input)
 
 chemicalWordCount = 0
 nonChemicalWordCount = 0
+elementCount = 0
 
 for word in words:
     charArr = list(word)
@@ -171,6 +171,7 @@ for word in words:
         chemicalWordCount = chemicalWordCount + 1
         output.write(chemicalWord + "\n")
         print(chemicalWord)
+        elementCount = elementCount + len(chemicalWord.split())
     else:
         nonChemicalWordCount = nonChemicalWordCount + 1
 
@@ -178,4 +179,7 @@ output.write("\nChemical Word Count: " + str(chemicalWordCount) + "\n")
 print("\nChemical Word Count: " + str(chemicalWordCount))
 output.write("Non-Chemical Word Count: " + str(nonChemicalWordCount) + "\n")
 print("Non-Chemical Word Count: " + str(nonChemicalWordCount))
-
+output.write("Element Count: " + str(elementCount) + "\n")
+print("Element Count: " + str(elementCount))
+output.write("Average of Elements per Word: " + str(elementCount / chemicalWordCount))
+print("Average of Elements per Word: " + str(elementCount / chemicalWordCount))
