@@ -131,8 +131,8 @@ def checkChemicalWord(charArr):
 
     i = 0
     try:
-        el = periodicTable[charArr[i]] + " "
-        
+        el = periodicTable[str(charArr[i] + charArr[i + 1])] + " "
+        charArr.pop(i + 1)
         charArr.pop(i)
 
         check, chemicalWord = checkChemicalWord(charArr)
@@ -142,10 +142,9 @@ def checkChemicalWord(charArr):
         return True, (el + chemicalWord)
     except:
         try:
-            el = periodicTable[str(charArr[i] + charArr[i + 1])] + " "
-            charArr.pop(i + 1)
-            charArr.pop(i)
+            el = periodicTable[charArr[i]] + " "
             
+            charArr.pop(i)
 
             check, chemicalWord = checkChemicalWord(charArr)
             if(not check):
