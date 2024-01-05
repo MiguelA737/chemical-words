@@ -126,26 +126,29 @@ periodicTable = {
 #         print("Warning: " + key + " and " + value + " doesn't match")
 
 def checkChemicalWord(charArr):
-    if(len(charArr) == 0):
+    auxArr = charArr.copy()
+    if(len(auxArr) == 0):
         return True, ""
 
     i = 0
     try:
-        el = periodicTable[str(charArr[i] + charArr[i + 1])] + " "
-        charArr.pop(i + 1)
-        charArr.pop(i)
+        auxArr2 = auxArr.copy()
+        el = periodicTable[auxArr2[i]] + " "
+        auxArr2.pop(i)
 
-        check, chemicalWord = checkChemicalWord(charArr)
+        check, chemicalWord = checkChemicalWord(auxArr2)
         if(not check):
             raise Exception()
             
         return True, (el + chemicalWord)
     except:
         try:
-            el = periodicTable[charArr[i]] + " "
-            charArr.pop(i)
+            auxArr2 = auxArr.copy()
+            el = periodicTable[str(auxArr2[i] + auxArr2[i + 1])] + " "
+            auxArr2.pop(i + 1)
+            auxArr2.pop(i)
 
-            check, chemicalWord = checkChemicalWord(charArr)
+            check, chemicalWord = checkChemicalWord(auxArr2)
             if(not check):
                 raise Exception()
                 
@@ -170,16 +173,16 @@ for word in words:
     if(check):
         chemicalWordCount = chemicalWordCount + 1
         output.write(chemicalWord + "\n")
-        print(chemicalWord)
+        #print(chemicalWord)
         elementCount = elementCount + len(chemicalWord.split())
     else:
         nonChemicalWordCount = nonChemicalWordCount + 1
 
 output.write("\nChemical Word Count: " + str(chemicalWordCount) + "\n")
-print("\nChemical Word Count: " + str(chemicalWordCount))
+#print("\nChemical Word Count: " + str(chemicalWordCount))
 output.write("Non-Chemical Word Count: " + str(nonChemicalWordCount) + "\n")
-print("Non-Chemical Word Count: " + str(nonChemicalWordCount))
+#print("Non-Chemical Word Count: " + str(nonChemicalWordCount))
 output.write("Element Count: " + str(elementCount) + "\n")
-print("Element Count: " + str(elementCount))
+#print("Element Count: " + str(elementCount))
 output.write("Average of Elements per Word: " + str(elementCount / chemicalWordCount))
-print("Average of Elements per Word: " + str(elementCount / chemicalWordCount))
+#print("Average of Elements per Word: " + str(elementCount / chemicalWordCount))
